@@ -1,6 +1,11 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+
 const app = express();
 const port = 8089;
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
 require("./routes/main")(app);
 app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
