@@ -9,6 +9,16 @@
 
 <body>
   <h1> This is devices page </h1>
+  <% if (!selectedDevice) { %>
+    <p>Select a device to add:</p>
+    <ul>
+      <% allDevices.forEach(function(device) { %>
+        <a href="/devices/add/<%= device.id %>"><%= device.name %></a>
+      <% }); %>
+      </li>
+  <% } else { %>
+    <p>Device selected is: <%= selectedDevice %>.</p>
+  <% } %>
 </body>
 
 </html>
