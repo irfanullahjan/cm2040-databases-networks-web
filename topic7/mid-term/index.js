@@ -1,5 +1,21 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const mysql = require("mysql2");
+
+const db = mysql.createConnection({ 
+ host: process.env.HOST || "localhost",
+ user: "root", 
+ password: "",
+ database: "smarthome"
+});
+// connect to database 
+db.connect((err) => { 
+ if (err) { 
+ throw err; 
+ } 
+ console.log("Connected to database"); 
+}); 
+global.db = db;
 
 const app = express();
 const port = 8089;

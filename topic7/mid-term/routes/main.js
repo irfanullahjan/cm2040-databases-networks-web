@@ -18,4 +18,15 @@ module.exports = function (app) {
     // saving data in database
     res.send(req.body)
   });
+  app.get("/list", function(req, res) { 
+    // query database to get all the books
+    let sqlquery = "SHOW DATABASES";
+    // execute sql query
+    db.query(sqlquery, (err, result) => { 
+    if (err) { 
+    res.redirect("/"); 
+    } 
+    res.send(result)
+    });
+   });
 }

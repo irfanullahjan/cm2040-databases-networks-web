@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  app:
+    build: .
+    depends_on:
+      - db
+    environment:
+      - HOST=host.docker.internal
+    ports: 
+      - 3000:8089
+  db:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_DATABASE=smarthome
+    ports: 
+      - 3306:3306
+    volumes:
+      - mysql_db:/var/lib/mysql
+volumes:
+  mysql_db:
