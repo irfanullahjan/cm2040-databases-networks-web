@@ -9,16 +9,22 @@
 
 <body>
   <h1> This is devices page </h1>
-  <% if (!selectedDevice) { %>
-    <p>Select a device to add:</p>
-    <ul>
-      <% allDevices.forEach(function(device) { %>
+  <p>Select a device to add:</p>
+  <ul>
+    <% allDevices.forEach(function(device) { %>
+      <li>
         <a href="/devices/add/<%= device.id %>"><%= device.name %></a>
-      <% }); %>
       </li>
-  <% } else { %>
-    <p>Device selected is: <%= selectedDevice %>.</p>
-  <% } %>
+    <% }); %>
+  </ul>
+  <!-- <% if (selectedDevice) { %>
+    <% selectedDevice.forEach(function(device)
+  <% } %> -->
+  <form method="POST" action="/devices/add">
+    <input id="first" type="text" name="first" value="first name" />
+    <input id="last" type="text" name="last" value="last name" />
+    <input type="submit" value="OK" />
+  </form>
 </body>
 
 </html>
