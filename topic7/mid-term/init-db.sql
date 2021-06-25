@@ -15,46 +15,89 @@ CREATE TABLE config_types(
 );
 
 CREATE TABLE device_types_configs(
-  device_type INT NOT NULL,
-  config_type INT NOT NULL,
-  PRIMARY KEY (device_type, config_type),
-  FOREIGN KEY (device_type) REFERENCES device_types(id) ON DELETE CASCADE,
-  FOREIGN KEY (config_type) REFERENCES config_types(id) ON DELETE CASCADE
+  device_type_id INT NOT NULL,
+  config_type_id INT NOT NULL,
+  PRIMARY KEY (device_type_id, config_type_id),
+  FOREIGN KEY (device_type_id) REFERENCES device_types(id) ON DELETE CASCADE,
+  FOREIGN KEY (config_type_id) REFERENCES config_types(id) ON DELETE CASCADE
 );
 
 CREATE TABLE user_devices(
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  device_type INT NOT NULL,
+  device_type_id INT NOT NULL,
   name VARCHAR(64) NOT NULL,
-  FOREIGN KEY (device_type) REFERENCES device_types(id)
+  FOREIGN KEY (device_type_id) REFERENCES device_types(id)
 );
 
 CREATE TABLE user_devices_configs(
-  user_device INT NOT NULL,
-  config_type INT NOT NULL,
-  PRIMARY KEY (user_device, config_type),
+  user_device_id INT NOT NULL,
+  config_type_id INT NOT NULL,
+  PRIMARY KEY (user_device_id, config_type_id),
   value VARCHAR(64) NOT NULL,
-  FOREIGN KEY (user_device) REFERENCES user_devices(id) ON DELETE CASCADE,
-  FOREIGN KEY (config_type) REFERENCES config_types(id) ON DELETE CASCADE
+  FOREIGN KEY (user_device_id) REFERENCES user_devices(id) ON DELETE CASCADE,
+  FOREIGN KEY (config_type_id) REFERENCES config_types(id) ON DELETE CASCADE
 );
 
 INSERT INTO device_types
 VALUES
-  (NULL, 'Television'),
-  (NULL, 'Lighting'),
-  (NULL, 'Radio'),
-  (NULL, 'Fan'),
-  (NULL, 'Door'),
-  (NULL, 'Thermostate'),
-  (NULL, 'Fire Alarm'),
-  (NULL, 'CCTV');
+  (1, 'Television'),
+  (2, 'Lighting'),
+  (3, 'Radio'),
+  (4, 'Fan'),
+  (5, 'Door'),
+  (6, 'Thermostate'),
+  (7, 'Fire alarm'),
+  (8, 'CCTV'),
+  (9, 'Water pump'),
+  (10, 'Refrigerater'),
+  (11, 'Door'),
+  (12, 'Oven'),
+  (13, 'Microwave oven'),
+  (14, 'Printer'),
+  (15, 'Window'),
+  (16, 'Airconditioner'),
+  (17, 'Garage'),
+  (18, 'Music player'),
+  (19, 'Internet router'),
+  (20, 'Vaccum cleaner');
 
 INSERT INTO config_types
 VALUES
-  (NULL, "Power", "radio", '["On", "Off"]'),
-  (NULL, "Mode", "select", '["Slow", "Medium", "Fast"]'),
-  (NULL, "Auto-sleep", "checkbox", NULL),
-  (NULL, "Volume", "number", '[0, 100]');
+  (1, "Name", "text", NULL),
+  (2, "Power", "radio", '["On", "Off"]'),
+  (3, "Mode", "select", '["Slow", "Medium", "Fast"]'),
+  (4, "Auto-sleep", "checkbox", NULL),
+  (5, "Auto-update", "checkbox", NULL),
+  (6, "Volume", "range", '[0, 100]'),
+  (7, "Open/Close", "radio", '["Open", "Close"]'),
+  (8, "Temperature", "range", '[0, 100]'),
+  (9, "Brightness", "range", '[0, 100]'),
+  (10, "Cooling", "range", '[-100, 0]'),
+  (11, "Alarm", "radio", '["On", "Off"]'),
+  (12, "Timer", "select", '["5min", "10min", "30min", "60min"]'),
+  (13, "IP Address", "text", NULL),
+  (14, "Tint", "select", '["Neutral", "Red", "Yellow", "Green", "Blue", "Violet"]'),
+  (15, "White balance", "select", '["Extra warm", "Warm", "Neutral", "Cool", "Extra cool"]');
 
 INSERT INTO device_types_configs
-VALUES (1, 1), (1, 3), (1, 4), (2, 1), (3, 1), (3, 4);
+VALUES
+  (1, 1), (1, 2), (1, 4), (1, 5), (1, 6), (1, 9), (1, 13), (1, 14), (1, 15), 
+  (2, 1), (2, 2), (2, 5), (2, 9), (2, 14), (2, 15), 
+  (3, 1), (3, 2),
+  (4, 1),
+  (5, 1),
+  (6, 1),
+  (7, 1),
+  (8, 1),
+  (9, 1),
+  (10, 1),
+  (11, 1),
+  (12, 1),
+  (13, 1),
+  (14, 1),
+  (15, 1),
+  (16, 1),
+  (17, 1),
+  (18, 1),
+  (19, 1),
+  (20, 1);
