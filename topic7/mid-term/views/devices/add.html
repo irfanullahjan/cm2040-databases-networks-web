@@ -12,8 +12,10 @@
   <p>Select a device type to add:</p>
   <select onchange="if (this.value) window.location.href='/devices/add/'+this.value" value>
     <% allDevices.forEach(function(device) { %> 
-      <option value="<%= device.id %>" <% if(deviceTypeId == device.id) { %><%- "selected" %><% } %>>
-        <a href="/devices/add/<%= device.id %>"><%= device.name %></a>
+      <option
+        value="<%= device.id %>"
+        <% if(deviceTypeId == device.id) { %><%- "selected" %><% } %>>
+        <%= device.name %>
       </option>
     <% }); %>
   </select>
@@ -22,30 +24,50 @@
     <form method="POST">
       <% selectedDeviceConfigs.forEach(function(config) { %>
         <br>
+        <label><%= config.name %></label>
         <% if (config.input == 'radio') { %>
-          <label><%= config.name %></label>
-          <% config.presets.forEach(function(preset) { %>
+          <% config.presets.forEach(function(preset, i) { %>
+            <input
+              type="radio"
+              name="<%= config.config_type_id %>"
+              value="<%= preset %>"
+              <% if (i === 0) { %><%- "checked" %> <% } %>>
             <label><%= preset %></label>
-            <input type="radio" name="<%= config.config_type_id %>" value="<%= preset %>">
           <% }) %>
         <% } else if (config.input == 'range') { %>
-          <label><%= config.name %></label><br>
+          <br>
           <input
             type="range"
             name="<%= config.config_type_id %>"
             min="<%= config.presets[0] %>"
             max="<%= config.presets[1] %>"
-            oninput="this.nextElementSibling.value = this.value">
-          <output></output><br>
+            step="1"
+            value="<%= Math.round((config.presets[0] + config.presets[1])/2)  %> "
+            oninput="this.nextElementSibling.value = this.value+'%'">
+          <output><%= Math.round((config.presets[0] + config.presets[1])/2)+'%' %></output>
         <% } else if (config.input == 'text') { %>
-          <label><%= config.name %></label><br>
+          <br>
           <input
             type="text"
-            name="<%= config.config_type_id %>"
-            oninput="this.nextElementSibling.value = this.value">
-          <output></output><br>
+            name="<%= config.config_type_id %>" required>
+        <% } else if (config.input == 'select') { %>
+          <br>
+          <select
+            type="select"
+            name="<%= config.config_type_id %>">
+            <% config.presets.forEach(function(preset) { %>
+              <option><%= preset %></option>
+            <% }) %> 
+          </select>
+        <% } else if (config.input == 'checkbox') { %>
+          <br>
+          <input
+            type="checkbox"
+            name="<%= config.config_type_id %>">
         <% } %>
+        <br>
       <% }) %>
+      <br>
       <input type="submit" value="Save" />
     </form>
   <% } %>

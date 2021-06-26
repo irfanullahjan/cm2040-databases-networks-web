@@ -65,7 +65,7 @@ INSERT INTO config_types
 VALUES
   (1, "Name", "text", NULL),
   (2, "Power", "radio", '["On", "Off"]'),
-  (3, "Mode", "select", '["Slow", "Medium", "Fast"]'),
+  (3, "Speed", "radio", '["Slow", "Medium", "Fast"]'),
   (4, "Auto-sleep", "checkbox", NULL),
   (5, "Auto-update", "checkbox", NULL),
   (6, "Volume", "range", '[0, 100]'),
@@ -77,27 +77,28 @@ VALUES
   (12, "Timer", "select", '["5min", "10min", "30min", "60min"]'),
   (13, "IP Address", "text", NULL),
   (14, "Tint", "select", '["Neutral", "Red", "Yellow", "Green", "Blue", "Violet"]'),
-  (15, "White balance", "select", '["Extra warm", "Warm", "Neutral", "Cool", "Extra cool"]');
+  (15, "White balance", "select", '["Neutral", "Extra warm", "Warm", "Cool", "Extra cool"]'),
+  (16, "RPM", "range", '[0, 1000]');
 
 INSERT INTO device_types_configs
 VALUES
   (1, 1), (1, 2), (1, 4), (1, 5), (1, 6), (1, 9), (1, 13), (1, 14), (1, 15), 
   (2, 1), (2, 2), (2, 5), (2, 9), (2, 14), (2, 15), 
-  (3, 1), (3, 2),
-  (4, 1),
+  (3, 1), (3, 2), (3, 4), (3, 6),
+  (4, 1), (4, 2), (4, 16),
   (5, 1),
-  (6, 1),
+  (6, 1), (6, 2), (6, 8),
   (7, 1),
   (8, 1),
   (9, 1),
   (10, 1),
-  (11, 1),
-  (12, 1),
-  (13, 1),
+  (11, 1), (11, 7),
+  (12, 1), (12, 2), (12, 7),
+  (13, 1), (13, 2), (13, 7),
   (14, 1),
-  (15, 1),
+  (15, 1), (15, 7),
   (16, 1),
-  (17, 1),
-  (18, 1),
-  (19, 1),
-  (20, 1);
+  (17, 1), (17, 7),
+  (18, 1), (18, 2), (18, 4), (18, 6), 
+  (19, 1), (19, 2), (19, 13),
+  (20, 1), (20, 2), (20, 3) ;
