@@ -43,8 +43,8 @@
             max="<%= config.presets[1] %>"
             step="1"
             value="<%= Math.round((config.presets[0] + config.presets[1])/2)  %> "
-            oninput="this.nextElementSibling.value = this.value+'%'">
-          <output><%= Math.round((config.presets[0] + config.presets[1])/2)+'%' %></output>
+            oninput="this.nextElementSibling.value = this.value">
+          <output><%= Math.round((config.presets[0] + config.presets[1])/2) %></output>
         <% } else if (config.input == 'text') { %>
           <br>
           <input

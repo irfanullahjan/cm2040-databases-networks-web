@@ -22,7 +22,7 @@ router.get("/:type?", function (req, res) {
         LEFT JOIN device_types_configs ON device_types.id = device_types_configs.device_type_id\
         LEFT JOIN config_types ON config_types.id = device_types_configs.config_type_id\
         WHERE device_types.id = ?;";
-    db.execute(sqlquery, [deviceTypeId], (err, selectedDeviceConfigs) => {
+    db.query(sqlquery, [deviceTypeId], (err, selectedDeviceConfigs) => {
       if (err) {
         res
           .status(500)
@@ -30,7 +30,10 @@ router.get("/:type?", function (req, res) {
       }
       res.render(view, {
         title: "Select a device to add",
-        selectedDeviceConfigs: selectedDeviceConfigs,
+        selectedDeviceConfigs: selectedDeviceConfigs.map((value) => ({
+          ...value,
+          presets: JSON.parse(value.presets),
+        })),
         allDevices: allDevices,
         deviceTypeId: deviceTypeId,
       });
@@ -41,18 +44,20 @@ router.get("/:type?", function (req, res) {
 // Add device form submitted
 router.post("/:type", function (req, res) {
   let sqlquery = "INSERT INTO user_devices VALUES (NULL, ?)";
-  db.execute(sqlquery, [req.params["type"]], (err, created) => {
+  db.query(sqlquery, [req.params["type"]], (err, created) => {
     if (err) {
       res.status(500).send("Database query to add new user device failed.");
       return;
     }
     const submittedKeys = Object.keys(req.body);
     const submittedValues = Object.values(req.body);
-    const valuesToInsert = submittedKeys
-      .map((key, i) => `(${created.insertId},${key},'${submittedValues[i]}')`)
-      .join(",");
-    sqlquery = `INSERT INTO user_devices_configs VALUES ${valuesToInsert}`;
-    db.query(sqlquery, (err) => {
+    const valuesToInsert = submittedKeys.map((key, i) => [
+      created.insertId,
+      +key,
+      submittedValues[i],
+    ]);
+    sqlquery = `INSERT INTO user_devices_configs VALUES ?`;
+    db.query(sqlquery, [valuesToInsert], (err) => {
       if (err) {
         res
           .status(500)

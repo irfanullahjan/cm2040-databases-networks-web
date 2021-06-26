@@ -2,6 +2,8 @@
 -- Run these to populate initial data IN the database
 -- Assumes that Database named `smarthome` is already created USE smarthome;
 
+USE smarthome;
+
 CREATE TABLE device_types(
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(64) NOT NULL
@@ -101,3 +103,8 @@ VALUES
   (18, 1), (18, 2), (18, 4), (18, 6), 
   (19, 1), (19, 2), (19, 13),
   (20, 1), (20, 2), (20, 3) ;
+
+
+--only for docker mysql to enable insecure authentication becuase node package 'mysql' doesn't work otherwise
+ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY '';
+flush privileges;
