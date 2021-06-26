@@ -25,7 +25,6 @@ CREATE TABLE device_types_configs(
 CREATE TABLE user_devices(
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   device_type_id INT NOT NULL,
-  name VARCHAR(64) NOT NULL,
   FOREIGN KEY (device_type_id) REFERENCES device_types(id)
 );
 

@@ -39,8 +39,30 @@ router.get("/:type?", function (req, res) {
 });
 
 // Add device form submitted
-router.post("/:type?", function (req, res) {
-  res.send("Form submitted");
+router.post("/:type", function (req, res) {
+  let sqlquery = "INSERT INTO user_devices VALUES (NULL, ?)";
+  db.execute(sqlquery, [req.params["type"]], (err, created) => {
+    if (err) {
+      res.status(500).send("Database query to add new user device failed.");
+      return;
+    }
+    const submittedKeys = Object.keys(req.body);
+    const submittedValues = Object.values(req.body);
+    const valuesToInsert = submittedKeys
+      .map((key, i) => `(${created.insertId},${key},'${submittedValues[i]}')`)
+      .join(",");
+    sqlquery = `INSERT INTO user_devices_configs VALUES ${valuesToInsert}`;
+    db.query(sqlquery, (err) => {
+      if (err) {
+        res
+          .status(500)
+          .send("Database query to save the device properties failed.");
+        console.log(err);
+        return;
+      }
+      res.send("Form submitted, please go back to home.");
+    });
+  });
 });
 
 module.exports = router;
