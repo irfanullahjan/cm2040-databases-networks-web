@@ -65,7 +65,7 @@ router.post("/:type", function (req, res) {
         console.log(err);
         return;
       }
-      res.send("Form submitted, please go back to home.");
+      res.redirect(301, "/devices");
     });
   });
 });

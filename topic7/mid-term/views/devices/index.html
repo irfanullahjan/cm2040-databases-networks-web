@@ -9,6 +9,24 @@
 
 <body>
   <h1>This page lists the devices that you have added:</h1>
+  <table>
+    <thead>
+      <tr>
+        <% Object.keys(userDevicesDetails[0]).forEach(key => { %>
+          <td><%= key %></td>
+        <% }); %>
+      </tr>
+      </thead>
+    <tbody>
+      <% userDevicesDetails.forEach(device => { %>
+        <tr>
+          <td><%= device.id %></td>
+          <td><%= device.type %></td>
+          <td><%= device.name %></td>
+        </tr>
+      <% }); %> 
+    </tbody>
+  </table>
 </body>
 
 </html>
