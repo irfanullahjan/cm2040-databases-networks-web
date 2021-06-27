@@ -25,4 +25,7 @@ router.get("/", function (req, res) {
 // Add new device page
 router.use("/add", require("./add"));
 
+// Delete device confirmation page
+router.use("/delete", require("./delete"));
+
 module.exports = router;

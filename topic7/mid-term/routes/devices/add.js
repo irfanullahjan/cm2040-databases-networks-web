@@ -5,7 +5,7 @@ const view = "devices/add.html";
 
 // Add device form
 router.get("/:type?", function (req, res) {
-  const deviceTypeId = req.params["type"] || 0;
+  const deviceTypeId = parseInt(req.params["type"]) || 0;
 
   // redirect so that first device is selected initially
   if (deviceTypeId < 1) {
@@ -43,8 +43,14 @@ router.get("/:type?", function (req, res) {
 
 // Add device form submitted
 router.post("/:type", function (req, res) {
+  const deviceTypeId = parseInt(req.params["type"]) || 0;
+  // if deviceTypeId is invalid
+  if (deviceTypeId < 1) {
+    res.status(401).send("Invalid device type Id in route.");
+    return;
+  }
   let sqlquery = "INSERT INTO user_devices VALUES (NULL, ?)";
-  db.query(sqlquery, [req.params["type"]], (err, created) => {
+  db.query(sqlquery, [deviceTypeId], (err, created) => {
     if (err) {
       res.status(500).send("Database query to add new user device failed.");
       return;

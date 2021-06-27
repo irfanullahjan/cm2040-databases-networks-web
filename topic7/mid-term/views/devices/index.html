@@ -8,25 +8,40 @@
 </head>
 
 <body>
-  <h1>This page lists the devices that you have added:</h1>
-  <table>
-    <thead>
-      <tr>
-        <% Object.keys(userDevicesDetails[0]).forEach(key => { %>
-          <td><%= key %></td>
-        <% }); %>
-      </tr>
-      </thead>
-    <tbody>
-      <% userDevicesDetails.forEach(device => { %>
+  <%- include("../../common/header.html") %>
+  <h1>Added devices</h1>
+  <% if (userDevicesDetails.length > 0) { %> 
+    <p>The following table lists the devices that you have added.</p>
+    <table>
+      <thead>
         <tr>
-          <td><%= device.id %></td>
-          <td><%= device.type %></td>
-          <td><%= device.name %></td>
+          <% Object.keys(userDevicesDetails[0]).forEach(key => { %>
+            <td><%= key.toUpperCase() %></td>
+          <% }); %>
+          <td>DELETE</td>
         </tr>
-      <% }); %> 
-    </tbody>
-  </table>
+        </thead>
+      <tbody>
+        <% userDevicesDetails.forEach(device => { %>
+          <tr>
+            <td><%= device.id %></td>
+            <td><%= device.type %></td>
+            <td><%= device.name %></td>
+            <td>
+              <a
+                href="/devices/delete/<%= device.id %>"
+                onclick="return confirm('Are you sure to delete this device?')"
+              >
+                delete
+              </a>
+            </td>
+          </tr>
+        <% }); %> 
+      </tbody>
+    </table>
+  <% } else { %>
+    No devices have been added. Please add a device to see it here.
+  <% } %>
 </body>
 
 </html>
