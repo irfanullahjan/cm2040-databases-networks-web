@@ -28,6 +28,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // All app routes pass through here
 app.use("/", require("./routes"));
 
+// Static public files (at root directory)
+app.use(express.static('public'));
+
 // require("./routes/main")(app);
 app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");

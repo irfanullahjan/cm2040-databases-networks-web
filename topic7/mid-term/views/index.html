@@ -3,14 +3,13 @@
 
 <head>
   <title><%= title %></title>
+  <%- include("../common/head.html") %>
 </head>
 
 <body>
-  <%- include("../common/header.html") %>
-  <h1> This is home page </h1>
-  <p>Homepage This is an example paragraph. Anything in the <strong>body
-    </strong> tag will appear on the page, just like this <strong>p</strong> tag and its contents.
-  </p>
+  <%- include("../common/navbar.html") %>
+  <h1><%= title %></h1>
+  <p>Please add devices or view the devices you have added via the links above.</p>
 </body>
 
 </html>

@@ -5,10 +5,11 @@
   <title>
     <%= title %>
   </title>
+  <%- include("../../common/head.html") %>
 </head>
 
 <body>
-  <%- include("../../common/header.html") %>
+  <%- include("../../common/navbar.html") %>
   <h1>Added devices</h1>
   <% if (userDevicesDetails.length > 0) { %> 
     <p>The following table lists the devices that you have added.</p>

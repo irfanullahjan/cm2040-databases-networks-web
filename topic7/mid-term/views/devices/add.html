@@ -5,10 +5,11 @@
   <title>
     <%= title %>
   </title>
+  <%- include("../../common/head.html") %>
 </head>
 
 <body>
-  <%- include("../../common/header.html") %>
+  <%- include("../../common/navbar.html") %>
   <h1>Add a new device</h1>
   <p>Select a device type to add:</p>
   <select onchange="if (this.value) window.location.href='/devices/add/'+this.value" value>
@@ -50,7 +51,8 @@
           <br>
           <input
             type="text"
-            name="<%= config.config_type_id %>">
+            name="<%= config.config_type_id %>"
+            <% if (config.name == 'Name') { %><%= "required" %> <% } %>>
         <% } else if (config.input == 'select') { %>
           <br>
           <select
