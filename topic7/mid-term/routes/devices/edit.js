@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
 
+const view = "devices/edit.html";
+
 // Add device form
 router.get("/:type?", function (req, res) {
   const deviceTypeId = parseInt(req.params["type"]) || 0;
@@ -26,7 +28,7 @@ router.get("/:type?", function (req, res) {
           .status(500)
           .send("Database query to fetch device type configs failed.");
       }
-      res.render("devices/add.html", {
+      res.render(view, {
         title: "Select a device to add",
         selectedDeviceConfigs: selectedDeviceConfigs.map((value) => ({
           ...value,
@@ -48,7 +50,7 @@ router.post("/:type", function (req, res) {
     return;
   }
   let sqlquery = "INSERT INTO user_devices VALUES (NULL, ?)";
-  db.query(sqlquery, [deviceTypeId], (err, device) => {
+  db.query(sqlquery, [deviceTypeId], (err, created) => {
     if (err) {
       res.status(500).send("Database query to add new user device failed.");
       return;
@@ -56,12 +58,12 @@ router.post("/:type", function (req, res) {
     const submittedKeys = Object.keys(req.body);
     const submittedValues = Object.values(req.body);
     const valuesToInsert = submittedKeys.map((key, i) => [
-      device.insertId,
+      created.insertId,
       +key,
       submittedValues[i],
     ]);
     sqlquery = `INSERT INTO user_devices_configs VALUES ?`;
-    db.query(sqlquery, [valuesToInsert], err => {
+    db.query(sqlquery, [valuesToInsert], (err) => {
       if (err) {
         res
           .status(500)
@@ -69,10 +71,7 @@ router.post("/:type", function (req, res) {
         console.log(err);
         return;
       }
-      res.render("devices/added.html", {
-        title: "Device added",
-        id: device.insertId,
-      });
+      res.redirect(301, "/devices");
     });
   });
 });

@@ -19,6 +19,7 @@
           <% Object.keys(userDevicesDetails[0]).forEach(key => { %>
             <td><%= key.toUpperCase() %></td>
           <% }); %>
+          <td>EDIT</td>
           <td>DELETE</td>
         </tr>
         </thead>
@@ -28,12 +29,13 @@
             <td><%= device.id %></td>
             <td><%= device.type %></td>
             <td><%= device.name %></td>
+            <td><a href="/devices/edit/<%= device.id %>">Edit</a></td>
             <td>
               <a
                 href="/devices/delete/<%= device.id %>"
                 onclick="return confirm('Are you sure to delete this device?')"
               >
-                delete
+                Delete
               </a>
             </td>
           </tr>

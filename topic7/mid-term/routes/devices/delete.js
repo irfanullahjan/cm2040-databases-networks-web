@@ -1,8 +1,6 @@
 var express = require("express");
 var router = express.Router();
 
-const view = "devices/delete.html";
-
 // Delete device confirmation page
 router.get("/:type?", function (req, res) {
   const deviceId = parseInt(req.params["type"]) || 0;
@@ -13,11 +11,11 @@ router.get("/:type?", function (req, res) {
     return;
   }
   let sqlquery = "DELETE FROM user_devices WHERE id = ?";
-  db.query(sqlquery, [deviceId], (err, result) => {
+  db.query(sqlquery, [deviceId], err => {
     if (err) {
       res.status(500).send("Database query to delete the device failed.");
     }
-    res.render(view, {
+    res.render("devices/deleted.html", {
       title: "Device deleted",
       id: deviceId,
     });

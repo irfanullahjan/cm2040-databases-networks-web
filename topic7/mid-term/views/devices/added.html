@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <script>
+    setTimeout(() => {
+      window.location.href = "/devices";
+    }, 2500);
+  </script>
+</head>
+
+<body>
+  <h1>Device <%= id %> added.</h1>
+  <p>Redirecting you back to devices pages...</p>
+  <p>If not redirected, please click here: <a href="/devices">devices</a></p>
+</body>
+
+</html>

@@ -14,7 +14,6 @@ router.get("/", function (req, res) {
       res.status(500).send("Database query to fetch user devices failed.");
       return;
     }
-    console.log(result);
     res.render("devices/index.html", {
       title: "Registered devices",
       userDevicesDetails: result,
@@ -24,6 +23,9 @@ router.get("/", function (req, res) {
 
 // Add new device page
 router.use("/add", require("./add"));
+
+// Edit device confirmation
+router.use("/edit", require("./edit"));
 
 // Delete device confirmation page
 router.use("/delete", require("./delete"));
