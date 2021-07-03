@@ -26,9 +26,9 @@ router.get("/:id", function (req, res) {
         LEFT JOIN device_types ON device_types.id = user_devices.device_type_id\
         LEFT JOIN device_types_configs ON device_types_configs.device_type_id = device_types.id\
         LEFT JOIN config_types ON config_types.id = device_types_configs.config_type_id\
-        LEFT JOIN user_devices_configs ON user_devices_configs.config_type_id = device_types_configs.config_type_id\
+        LEFT JOIN user_devices_configs ON user_devices_configs.config_type_id = device_types_configs.config_type_id AND user_devices_configs.user_device_id = ?\
         WHERE user_devices.id = ?";
-    db.query(sqlquery, deviceId, (err, deviceConfigs) => {
+    db.query(sqlquery, [deviceId, deviceId], (err, deviceConfigs) => {
       if (err) {
         res
           .status(500)
@@ -53,13 +53,14 @@ router.post("/:id", function (req, res) {
     res.status(400).send("User device id is invalid.");
     return;
   }
-  const submittedKeys = Object.keys(req.body);
-  const submittedValues = Object.values(req.body);
-  const valuesToInsert = submittedKeys.map((key, i) => [
-    deviceId,
-    +key,
-    typeof submittedValues[i] === "object" ? submittedValues[i][1] : submittedValues[i],
-  ]);
+  const formKeys = Object.keys(req.body);
+  const formValues = Object.values(req.body);
+  const valuesToInsert = formKeys.map((key, i) => {
+    // hack for forcing checkbox unchecked value to be registered with form submission
+    const value =
+      typeof formValues[i] === "object" ? formValues[i][1] : formValues[i];
+    return [deviceId, +key, value];
+  });
   let sqlquery =
     "INSERT INTO user_devices_configs (user_device_id, config_type_id, value)\
       VALUES ?\

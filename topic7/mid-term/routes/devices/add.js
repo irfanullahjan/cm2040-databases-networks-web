@@ -54,15 +54,16 @@ router.post("/:type", function (req, res) {
       res.status(500).send("Database query to add new user device failed.");
       return;
     }
-    const submittedKeys = Object.keys(req.body);
-    const submittedValues = Object.values(req.body);
-    const valuesToInsert = submittedKeys.map((key, i) => [
-      device.insertId,
-      +key,
-      submittedValues[i],
-    ]);
+    const formKeys = Object.keys(req.body);
+    const formValues = Object.values(req.body);
+    const valuesToInsert = formKeys.map((key, i) => {
+      // hack for forcing checkbox unchecked value to be registered with form submission
+      const value =
+        typeof formValues[i] === "object" ? formValues[i][1] : formValues[i];
+      return [device.insertId, +key, value];
+    });
     sqlquery = `INSERT INTO user_devices_configs VALUES ?`;
-    db.query(sqlquery, [valuesToInsert], err => {
+    db.query(sqlquery, [valuesToInsert], (err) => {
       if (err) {
         res
           .status(500)
