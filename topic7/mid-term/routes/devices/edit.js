@@ -1,8 +1,6 @@
 var express = require("express");
 var router = express.Router();
 
-const view = "devices/edit.html";
-
 // Edit device page
 router.get("/:id", function (req, res) {
   const deviceId = parseInt(req.params["id"]) || 0;
@@ -34,7 +32,7 @@ router.get("/:id", function (req, res) {
           .status(500)
           .send("Database query to fetch device type configs failed.");
       }
-      res.render(view, {
+      res.render("devices/edit.html", {
         title: "Select a device to add",
         deviceConfigs: deviceConfigs.map((value) => ({
           ...value,
@@ -71,7 +69,10 @@ router.post("/:id", function (req, res) {
       console.error(err);
       return;
     }
-    res.redirect(301, "/devices");
+    res.render("devices/edited.html", {
+      title: "Device updated",
+      id: deviceId,
+    });
   });
 });
 

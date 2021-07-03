@@ -26,7 +26,6 @@ router.get("/:type?", function (req, res) {
           .status(500)
           .send("Database query to fetch device type configs failed.");
       }
-      console.log(deviceConfigs);
       res.render("devices/add.html", {
         title: "Select a device to add",
         deviceConfigs: deviceConfigs.map((value) => ({
