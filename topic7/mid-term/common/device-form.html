@@ -1,6 +1,6 @@
-<% if (selectedDeviceConfigs && deviceTypeId) { %>
+<% if (deviceConfigs) { %>
   <form method="POST">
-    <% selectedDeviceConfigs.forEach(config => { %>
+    <% deviceConfigs.forEach(config => { %>
       <br>
       <label><%= config.name %></label>
       <% if (config.input == 'radio') { %>
@@ -9,7 +9,7 @@
             type="radio"
             name="<%= config.config_type_id %>"
             value="<%= preset %>"
-            <%= i === 0 ? "checked" : null %>>
+            <%= i === 0 && !config.value || preset === config.value ? "checked" : null %>>
           <label><%= preset %></label>
         <% }) %>
       <% } else if (config.input == 'range') { %>
@@ -20,14 +20,15 @@
           min="<%= config.presets[0] %>"
           max="<%= config.presets[1] %>"
           step="1"
-          value="<%= Math.round((config.presets[0] + config.presets[1])/2)  %> "
+          value="<%= config.value ? config.value : Math.round((config.presets[0] + config.presets[1])/2) %>"
           oninput="this.nextElementSibling.value = this.value">
-        <output><%= Math.round((config.presets[0] + config.presets[1])/2) %></output>
+        <output><%= config.value ? config.value : Math.round((config.presets[0] + config.presets[1])/2) %></output>
       <% } else if (config.input == 'text') { %>
         <br>
         <input
           type="text"
           name="<%= config.config_type_id %>"
+          value="<%= config.value %>"
           <%= config.name === "Name" ? "required" : null %>>
       <% } else if (config.input == 'select') { %>
         <br>
@@ -35,14 +36,16 @@
           type="select"
           name="<%= config.config_type_id %>">
           <% config.presets.forEach(preset => { %>
-            <option><%= preset %></option>
+            <option <%= config.value === preset ? "selected" : null %> ><%= preset %></option>
           <% }) %> 
         </select>
       <% } else if (config.input == 'checkbox') { %>
         <br>
+        <input type="hidden" name="<%= config.config_type_id %>" value="0" />
         <input
           type="checkbox"
-          name="<%= config.config_type_id %>">
+          name="<%= config.config_type_id %>"
+          <%= config.value === "on" ? "checked" : null %>>
       <% } %>
       <br>
     <% }) %>
