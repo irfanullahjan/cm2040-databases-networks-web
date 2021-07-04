@@ -26,7 +26,7 @@ router.get("/:id", function (req, res) {
         LEFT JOIN config_types ON config_types.id = device_types_configs.config_type_id\
         LEFT JOIN user_devices_configs ON user_devices_configs.config_type_id = device_types_configs.config_type_id AND user_devices_configs.user_device_id = ?\
         WHERE user_devices.id = ?";
-    db.query(sqlquery, [deviceId, deviceId], (err, deviceConfigs) => {
+    db.query(sqlquery, deviceId, (err, deviceConfigs) => {
       if (err) {
         res
           .status(500)
