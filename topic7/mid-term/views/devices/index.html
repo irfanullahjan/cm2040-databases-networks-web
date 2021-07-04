@@ -31,10 +31,7 @@
             <td><%= device.name %></td>
             <td><a href="/devices/edit/<%= device.id %>">Edit</a></td>
             <td>
-              <a
-                href="/devices/delete/<%= device.id %>"
-                onclick="return confirm('Are you sure to delete this device?')"
-              >
+              <a href="/devices/delete/<%= device.id %>">
                 Delete
               </a>
             </td>
