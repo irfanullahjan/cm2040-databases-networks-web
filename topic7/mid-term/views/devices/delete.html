@@ -10,10 +10,10 @@
 <body>
   <h1>Device <%= id %> will be deleted</h1>
   <p>Are you sure you want to delete the device?</p>
-  <form method="POST">
+  <form method="POST" style="display: inline;">
     <input type="submit" value="Confirm delete!">
   </form>
-  <p>If you don't want to delete please go back to: <a href="/devices">devices</a></p>
+  <button onclick="window.location.href='/devices'">Cancel delete</button>
 </body>
 
 </html>

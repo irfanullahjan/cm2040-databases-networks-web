@@ -29,7 +29,8 @@
           type="text"
           name="<%= config.config_type_id %>"
           value="<%= config.value %>"
-          <%= config.name === "Name" ? "required" : null %>>
+          <%= config.name === "Name" ? "required" : null %>
+          <% if (config.name === "IP Address") { %>pattern="\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b"<% } %> >
       <% } else if (config.input == 'select') { %>
         <br>
         <select

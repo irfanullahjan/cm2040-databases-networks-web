@@ -28,12 +28,12 @@ input[type="text"] {
   border-radius: 0;
 }
 
-input[type="text"]:required:invalid {
+input[type="text"]:invalid {
   border-color: red;
   outline-color: red;
 }
 
-input[type="text"]:required:valid {
+input[type="text"]:valid {
   border-color: limegreen;
   outline-color: limegreen;
 }
@@ -58,7 +58,6 @@ input[type="text"]:required:valid {
   padding: 0.5rem 1rem;
   background-color: lightsteelblue;
   color: black;
-  transition: all 0.2s ;
 }
 
 .main-nav a:hover {

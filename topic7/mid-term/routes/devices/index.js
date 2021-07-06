@@ -12,6 +12,7 @@ router.get("/", function (req, res) {
   db.query(sqlquery, (err, result) => {
     if (err) {
       res.status(500).send("Database query to fetch user devices failed.");
+      console.error(err);
       return;
     }
     res.render("devices/index.html", {
