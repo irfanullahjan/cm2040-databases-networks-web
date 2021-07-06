@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
 const ejs = require("ejs");
+const sassMiddleware = require("node-sass-middleware");
 
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -28,8 +29,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // All app routes pass through here
 app.use("/", require("./routes"));
 
+// adding the sass middleware
+app.use(
+  sassMiddleware({
+    src: __dirname + "/common/styles",
+    dest: __dirname + "/public",
+    debug: false,
+  })
+);
+
 // Static public files (at root directory)
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 // require("./routes/main")(app);
 app.set("views", __dirname + "/views");

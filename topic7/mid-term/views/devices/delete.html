@@ -2,18 +2,17 @@
 <html>
 
 <head>
-  <title>
-    <%= title %>
-  </title>
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
   <h1>Device <%= id %> will be deleted</h1>
   <p>Are you sure you want to delete the device?</p>
   <form method="POST" style="display: inline;">
-    <input type="submit" value="Confirm delete!">
+    <input class="btn btn-danger" type="submit" value="Confirm delete!">
   </form>
-  <button onclick="window.location.href='/devices'">Cancel delete</button>
+  <button class="btn btn-secondary" onclick="window.location.href='/devices'">Cancel delete</button>
 </body>
 
 </html>
