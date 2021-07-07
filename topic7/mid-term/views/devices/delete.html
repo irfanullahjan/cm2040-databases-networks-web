@@ -3,16 +3,21 @@
 
 <head>
   <title><%= title %></title>
-  <link rel="stylesheet" href="/style.css">
+  <%- include("../../common/head.html") %>
 </head>
 
 <body>
-  <h1>Device <%= id %> will be deleted</h1>
-  <p>Are you sure you want to delete the device?</p>
-  <form method="POST" style="display: inline;">
-    <input class="btn btn-danger" type="submit" value="Confirm delete!">
-  </form>
-  <button class="btn btn-secondary" onclick="window.location.href='/devices'">Cancel delete</button>
+  <%- include("../../common/navbar.html") %>
+  <div class="page-wrapper">
+    <div class="container">
+      <h1>Device <%= id %> will be deleted</h1>
+      <p>Are you sure you want to delete the device?</p>
+      <form method="POST" style="display: inline;">
+        <input class="btn btn-danger" type="submit" value="Confirm delete!">
+      </form>
+      <button class="btn btn-secondary" onclick="window.location.href='/devices'">Cancel delete</button>
+    </div>
+  </div>
 </body>
 
 </html>

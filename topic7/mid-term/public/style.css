@@ -7500,6 +7500,9 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important; } }
 
+.header-wrapper {
+  background-color: #212529; }
+
 input[type="text"] {
   border: 1px solid #333;
   outline: 1px solid #333;

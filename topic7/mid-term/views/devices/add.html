@@ -10,19 +10,23 @@
 
 <body>
   <%- include("../../common/navbar.html") %>
-  <h1>Add a new device</h1>
-  <p>Select a device type to add:</p>
-  <select onchange="if (this.value) window.location.href='/devices/add/'+this.value" value>
-    <% allDevices.forEach(device => { %> 
-      <option
-        value="<%= device.id %>"
-        <%= deviceTypeId === device.id ? "selected" : null %>>
-        <%= device.name %>
-      </option>
-    <% }); %>
-  </select>
-  <p>Fill the following details to add a new device of selected type:</p>
-  <%- include("../../common/device-form.html") %>
+  <div class="page-wrapper">
+    <div class="container">
+      <h1>Add a new device</h1>
+      <p>Select a device type to add:</p>
+      <select onchange="if (this.value) window.location.href='/devices/add/'+this.value" value>
+        <% allDevices.forEach(device => { %> 
+          <option
+            value="<%= device.id %>"
+            <%= deviceTypeId === device.id ? "selected" : null %>>
+            <%= device.name %>
+          </option>
+        <% }); %>
+      </select>
+      <p>Fill the following details to add a new device of selected type:</p>
+      <%- include("../../common/device-form.html") %>
+    </div>
+  </div>
 </body>
 
 </html>

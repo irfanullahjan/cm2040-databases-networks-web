@@ -10,12 +10,18 @@
       window.location.href = "/devices";
     }, 2500);
   </script>
+  <%- include("../../common/head.html") %>
 </head>
 
 <body>
-  <h1>Device <%= id %> deleted</h1>
-  <p>Redirecting you back to devices pages...</p>
-  <p>If not redirected, please click here: <a href="/devices">devices</a></p>
+  <%- include("../../common/navbar.html") %>
+  <div class="page-wrapper">
+    <div class="container">
+      <h1>Device <%= id %> deleted</h1>
+      <p>Redirecting you back to devices pages...</p>
+      <p>If not redirected, please click here: <a href="/devices">devices</a></p>
+    </div>
+  </div>
 </body>
 
 </html>

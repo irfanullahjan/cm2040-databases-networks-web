@@ -47,6 +47,6 @@ app.set("view engine", "ejs");
 app.engine("html", ejs.renderFile);
 app.listen(port, () =>
   console.log(
-    `Example app listening on port ${port}!$\nPlease go to http://localhost:8089`
+    `MySmartHome app running.\nHost: localhost\nPort: ${port}`
   )
 );
