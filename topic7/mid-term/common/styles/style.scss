@@ -15,16 +15,16 @@ input[type="text"] {
   border: 1px solid #333;
   outline: 1px solid #333;
   border-radius: 0;
-}
 
-input[type="text"]:invalid {
-  border-color: red;
-  outline-color: red;
-}
+  &:invalid {
+    border-color: red;
+    outline-color: red;
+  }
 
-input[type="text"]:valid {
-  border-color: limegreen;
-  outline-color: limegreen;
+  &:valid {
+    border-color: limegreen;
+    outline-color: limegreen;
+  }
 }
 
 /* Component styles */
@@ -32,4 +32,10 @@ input[type="text"]:valid {
   list-style-type: none;
   padding-left: 0%;
   display: flex;
+}
+
+.devices-table {
+  td:nth-child(n+4) {
+    text-align: right;
+  }
 }

@@ -15,14 +15,14 @@
       <h1>Added devices</h1>
       <% if (userDevicesDetails.length > 0) { %> 
         <p>The following table lists the devices that you have added.</p>
-        <table class="table table-sm">
+        <table class="table table-sm devices-table">
           <thead>
             <tr>
               <% Object.keys(userDevicesDetails[0]).forEach(key => { %>
                 <td><%= key.toUpperCase() %></td>
               <% }); %>
-              <td>EDIT</td>
-              <td>DELETE</td>
+              <td></td>
+              <td></td>
             </tr>
             </thead>
           <tbody>
@@ -31,9 +31,9 @@
                 <td><%= device.id %></td>
                 <td><%= device.type %></td>
                 <td><%= device.name %></td>
-                <td><a href="/devices/edit/<%= device.id %>">Edit</a></td>
+                <td><a class="btn btn-sm btn-primary" href="/devices/edit/<%= device.id %>">Edit</a></td>
                 <td>
-                  <a href="/devices/delete/<%= device.id %>">
+                  <a class="btn btn-sm btn-danger" href="/devices/delete/<%= device.id %>">
                     Delete
                   </a>
                 </td>
