@@ -25,6 +25,9 @@ router.get("/:type?", function (req, res) {
         res
           .status(500)
           .send("Database query to fetch device type configs failed.");
+      } else if (deviceConfigs.length < 1) {
+        res.status(404).send("Device type doesn't exist in the database.");
+        return;
       }
       res.render("devices/add.html", {
         title: "Select a device to add",
