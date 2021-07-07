@@ -3,19 +3,19 @@
 
 <head>
   <title><%= title %></title>
-  <%- include("../../common/head.html") %>
+  <%- include("../../common/components/head.html") %>
 </head>
 
 <body>
-  <%- include("../../common/navbar.html") %>
+  <%- include("../../common/components/navbar.html") %>
   <div class="page-wrapper">
     <div class="container">
       <h1>Device <%= id %> will be deleted</h1>
       <p>Are you sure you want to delete the device?</p>
       <form method="POST" style="display: inline;">
-        <input class="btn btn-danger" type="submit" value="Confirm delete!">
+        <input class="btn btn-danger" type="submit" value="Confirm">
+        <a class="btn btn-secondary" href="/devices">Cancel</a>
       </form>
-      <button class="btn btn-secondary" onclick="window.location.href='/devices'">Cancel delete</button>
     </div>
   </div>
 </body>

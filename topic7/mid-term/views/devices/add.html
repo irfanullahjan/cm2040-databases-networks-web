@@ -5,11 +5,11 @@
   <title>
     <%= title %>
   </title>
-  <%- include("../../common/head.html") %>
+  <%- include("../../common/components/head.html") %>
 </head>
 
 <body>
-  <%- include("../../common/navbar.html") %>
+  <%- include("../../common/components/navbar.html") %>
   <div class="page-wrapper">
     <div class="container">
       <h1>Add a new device</h1>
@@ -24,7 +24,7 @@
         <% }); %>
       </select>
       <p>Fill the following details to add a new device of selected type:</p>
-      <%- include("../../common/device-form.html") %>
+      <%- include("../../common/components/device-form.html") %>
     </div>
   </div>
 </body>
