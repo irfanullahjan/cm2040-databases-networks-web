@@ -25,6 +25,9 @@ router.get("/", function (req, res) {
 // Add new device page
 router.use("/add", require("./add"));
 
+// View device status
+router.use("/status", require("./status"));
+
 // Edit device confirmation
 router.use("/edit", require("./edit"));
 

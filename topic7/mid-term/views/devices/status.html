@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <%- include("../../common/components/head.html") %>
+</head>
+
+<body>
+  <%- include("../../common/components/navbar.html") %>
+  <div class="page-wrapper">
+    <div class="container">
+      <h1>Device status</h1>
+      <table class="table table-sm">
+        <thead>
+          <tr><th>Property</th><th>Value</th></tr>
+        </thead>
+        <tbody>
+          <% deviceConfigs.forEach(config => { %>
+            <tr><td><%= config.name %></td><td><%= config.value %></td></tr>
+          <% }); %> 
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+
+</html>

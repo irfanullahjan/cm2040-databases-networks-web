@@ -35,7 +35,7 @@ router.get("/:id", function (req, res) {
         return;
       }
       res.render("devices/edit.html", {
-        title: "Select a device to add",
+        title: "Edit device",
         deviceConfigs: deviceConfigs.map((value) => ({
           ...value,
           presets: JSON.parse(value.presets),
