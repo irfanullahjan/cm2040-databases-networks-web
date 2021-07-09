@@ -19,13 +19,14 @@
           id="dropdownMenuButton1"
           data-bs-toggle="dropdown"
           aria-expanded="false">
-          <!-- Highlight selected device in the dropdown -->
+          <!-- Show selected device on dropdown button -->
           <%= allDevices.find(device => device.id === deviceTypeId).name %> 
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
           <!-- Render dropdown list items -->
           <% allDevices.forEach(device => { %> 
             <li>
+              <!-- Highlight selected device in the dropdown -->
               <a
                 class="dropdown-item<%= deviceTypeId === device.id ? " active" : null %>"
                 href="/devices/add/<%= device.id %>"
