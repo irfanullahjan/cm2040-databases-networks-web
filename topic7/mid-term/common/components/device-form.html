@@ -3,9 +3,9 @@
     <% deviceConfigs.forEach(config => { %>
       <br>
       <label><%= config.name %></label>
+      <% // Render radio input %>
       <% if (config.input == 'radio') { %>
         <% config.presets.forEach((preset, i) => { %>
-          <!-- Render radio input -->
           <input
             type="radio"
             name="<%= config.config_type_id %>"
@@ -13,10 +13,10 @@
             <%= i === 0 && !config.value || preset === config.value ? "checked" : null %>>
           <label><%= preset %></label>
         <% }) %>
+      <% // Render range input %>
       <% } else if (config.input == 'range') { %>
         <br>
-        <!-- Render range input -->
-        <!-- Set range to value last saved by the user -->
+        <% // Set range to value last saved by the user %>
         <% var rangeValue = config.value ? config.value : Math.round((config.presets[0] + config.presets[1])/2) %>
         <input
           type="range"
@@ -25,22 +25,25 @@
           max="<%= config.presets[1] %>"
           step="1"
           value="<%= rangeValue %>"
+          <% // Set range value in the next sibling i.e. <output> %>
           oninput="this.nextElementSibling.value = this.value">
         <output><%= rangeValue %></output>
+      <% // Render text input %>
       <% } else if (config.input == 'text') { %>
         <br>
-        <!-- Render text input -->
         <input
           type="text"
           name="<%= config.config_type_id %>"
           value="<%= config.value %>"
+          <% // Make name required %>
           <%= config.name === "Name" ? "required" : null %>
-          <% if (config.name === "IP Address") { // enforce IP address pattern %>
+          <% // IP address pattern validation %>
+          <% if (config.name === "IP Address") { %>
             pattern="\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b"
           <% } %> >
+      <% // Render select %>
       <% } else if (config.input == 'select') { %>
         <br>
-        <!-- Render select -->
         <select
           type="select"
           name="<%= config.config_type_id %>">
@@ -48,7 +51,7 @@
             <option <%= config.value === preset ? "selected" : null %> ><%= preset %></option>
           <% }) %> 
         </select>
-        <!-- Render checkbox -->
+      <% // Render checkbox %>
       <% } else if (config.input == 'checkbox') { %>
         <br>
         <input type="hidden" name="<%= config.config_type_id %>" value="0" />

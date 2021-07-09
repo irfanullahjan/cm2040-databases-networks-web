@@ -23,12 +23,12 @@
                 <td><%= config.name %></td>
                 <td>
                   <div class="progress" style="height: 1.5rem">
-                    <!-- Progress bar percentage calculation -->
+                    <% // Progress bar percentage calculation %>
                     <% var progressPercent = Math.round((config.value - config.presets[0] ) * 100 / (config.presets[1] - config.presets[0])); %>
                     <div
                       class="progress-bar"
                       role="progressbar"
-                      style=<%- "\"width: " + progressPercent + "%;\"" %>
+                      style=<%- "\"opacity: 50%; width: " + progressPercent + "%;\"" %>
                       aria-valuenow="<%= config.value %>"
                       aria-valuemin="<%= config.presets[0] %>"
                       aria-valuemax="<%= config.presets[1] %>"
@@ -50,7 +50,7 @@
                 <td><%= config.name %></td>
                 <td>
                   <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                    <!-- Render radio and select items -->
+                    <% // Render radio and select items %>
                     <% config.presets.forEach(preset => { %> 
                       <input type="radio" class="btn-check" name="<%= config.id %>" id="btnradio1" autocomplete="off" <%= preset === config.value ? "checked" : ""; %>>
                       <label class="btn btn-sm btn-outline-primary disabled" for="btnradio1"><%= preset %> </label>
