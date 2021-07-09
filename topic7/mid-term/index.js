@@ -29,15 +29,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // All app routes pass through here
 app.use("/", require("./routes"));
 
-// adding the sass middleware
-app.use(
-  sassMiddleware({
-    src: __dirname + "/common/styles",
-    dest: __dirname + "/public",
-    debug: false,
-  })
-);
-
 // Static public files (at root directory)
 app.use(express.static("public"));
 
