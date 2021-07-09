@@ -25,11 +25,12 @@
                 <td><%= config.name %></td>
                 <td>
                   <div class="progress" style="height: 1.2rem">
+                    <% var progressPercent = Math.round((config.value - config.presets[0] ) * 100 / (config.presets[1] - config.presets[0])); %>
                     <div
                       class="progress-bar"
                       role="progressbar"
-                      style="width: <%= Math.round(config.value * 100 / config.presets[1]); %>%;"
-                      aria-valuenow="<%= Math.round(config.value * 100 / config.presets[1]); %>"
+                      style=<%- "\"width: " + progressPercent + "%;\"" %>
+                      aria-valuenow="<%= config.value %>"
                       aria-valuemin="<%= config.presets[0] %>"
                       aria-valuemax="<%= config.presets[1] %>">
                     </div>
