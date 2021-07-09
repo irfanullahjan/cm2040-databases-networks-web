@@ -4,11 +4,13 @@
 
 USE smarthome;
 
+-- Device types e.g. Television, Radio
 CREATE TABLE device_types(
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(64) NOT NULL
 );
 
+-- Device configuration type e.g. Power, Volume, Temperature
 CREATE TABLE config_types(
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(64) NOT NULL,
@@ -16,6 +18,7 @@ CREATE TABLE config_types(
   presets JSON
 );
 
+-- Mapping devices to configuration types e.g. Television has Power, Volume, IP Address
 CREATE TABLE device_types_configs(
   device_type_id INT NOT NULL,
   config_type_id INT NOT NULL,
@@ -24,12 +27,14 @@ CREATE TABLE device_types_configs(
   FOREIGN KEY (config_type_id) REFERENCES config_types(id) ON DELETE CASCADE
 );
 
+-- User devices e.g. Bedroom TV, Kitchen TV
 CREATE TABLE user_devices(
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   device_type_id INT NOT NULL,
   FOREIGN KEY (device_type_id) REFERENCES device_types(id)
 );
 
+-- User device configurations e.g. Bedroom Television Volume: 50%
 CREATE TABLE user_devices_configs(
   user_device_id INT NOT NULL,
   config_type_id INT NOT NULL,
@@ -39,6 +44,7 @@ CREATE TABLE user_devices_configs(
   FOREIGN KEY (config_type_id) REFERENCES config_types(id) ON DELETE CASCADE
 );
 
+ -- Initial data
 INSERT INTO device_types
 VALUES
   (1, 'Television'),
@@ -62,6 +68,7 @@ VALUES
   (19, 'Internet router'),
   (20, 'Vaccum cleaner');
 
+-- Initial data
 INSERT INTO config_types
 VALUES
   (1, "Name", "text", NULL),
@@ -80,6 +87,7 @@ VALUES
   (14, "Tint", "select", '["Neutral", "Red", "Yellow", "Green", "Blue", "Violet"]'),
   (15, "White balance", "select", '["Neutral", "Extra warm", "Warm", "Cool", "Extra cool"]');
 
+-- Initial data
 INSERT INTO device_types_configs
 VALUES
   (1, 1), (1, 2), (1, 4), (1, 5), (1, 6), (1, 9), (1, 13), (1, 14), (1, 15), 
@@ -103,7 +111,8 @@ VALUES
   (19, 1), (19, 2), (19, 13),
   (20, 1), (20, 2), (20, 3), (20, 12);
 
-
---only for docker mysql to enable insecure authentication becuase node package 'mysql' doesn't work otherwise
-ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY '';
-flush privileges;
+-- IMPORTANT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+-- ONLY for docker mysql to enable insecure authentication becuase node package 'mysql' doesn't work otherwise
+-- PLEASE UNCOMMENT THE FOLLOWING LINES AND THEN USE
+-- ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY '';
+-- flush privileges;

@@ -3,6 +3,7 @@ var router = express.Router();
 
 // View device status
 router.get("/:id", function (req, res) {
+  // Device id is an integer therefore we parseInt, if it fails we set it to 0
   const deviceId = parseInt(req.params["id"]) || 0;
 
   // If device id is invalid i.e. 0 or NaN
@@ -10,6 +11,7 @@ router.get("/:id", function (req, res) {
     res.status(400).send("User device id is invalid.");
     return;
   }
+  // Fetch user device type
   let sqlquery =
     "SELECT user_devices.id, device_types.name as type FROM user_devices\
       LEFT JOIN device_types ON device_types.id = user_devices.device_type_id\
@@ -23,6 +25,8 @@ router.get("/:id", function (req, res) {
       res.status(404).send("User device does not exist.");
       return;
     }
+
+    // Fetch device type configs, plus user device configs to prepare a dashboard to visualize device status
     sqlquery =
       "SELECT device_types_configs.config_type_id, config_types.name, config_types.input, config_types.presets, user_devices_configs.value FROM user_devices\
         LEFT JOIN device_types ON device_types.id = user_devices.device_type_id\
@@ -38,6 +42,7 @@ router.get("/:id", function (req, res) {
         console.error(err);
         return;
       }
+      // Render device status dashboard
       res.render("devices/status.html", {
         title: "Device status",
         userDevice: userDevices[0],

@@ -3,6 +3,8 @@ var router = express.Router();
 
 // Devices main page
 router.get("/", function (req, res) {
+  // Fetch uesr devices along with device type and device name in user device configs.
+  // This is need to prepare devices table
   const sqlquery =
     "SELECT user_devices.id, device_types.name as type, user_devices_configs.value as name FROM user_devices\
       LEFT JOIN device_types ON device_types.id = user_devices.device_type_id\
@@ -15,6 +17,7 @@ router.get("/", function (req, res) {
       console.error(err);
       return;
     }
+    // Render devices table
     res.render("devices/index.html", {
       title: "Registered devices",
       userDevicesDetails: result,

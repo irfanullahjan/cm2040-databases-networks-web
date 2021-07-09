@@ -3,6 +3,7 @@ var router = express.Router();
 
 // Edit device page
 router.get("/:id", function (req, res) {
+  // Device id is an integer therefore we parseInt, if it fails we set it to 0
   const deviceId = parseInt(req.params["id"]) || 0;
 
   // If device id is invalid i.e. 0 or NaN
@@ -10,6 +11,7 @@ router.get("/:id", function (req, res) {
     res.status(400).send("User device id is invalid.");
     return;
   }
+
   let sqlquery = "SELECT * FROM user_devices WHERE id = ?";
   db.query(sqlquery, deviceId, (err, userDevices) => {
     if (err) {
@@ -19,6 +21,7 @@ router.get("/:id", function (req, res) {
       res.status(404).send("User device does not exist.");
       return;
     }
+    // Select all device configs, possible preset values as well as the actual user setting values to populate edit form
     sqlquery =
       "SELECT device_types_configs.config_type_id, config_types.name, config_types.input, config_types.presets, user_devices_configs.value FROM user_devices\
         LEFT JOIN device_types ON device_types.id = user_devices.device_type_id\
@@ -34,6 +37,7 @@ router.get("/:id", function (req, res) {
         console.error(err);
         return;
       }
+      // Render edit form with pre-populated values
       res.render("devices/edit.html", {
         title: "Edit device",
         deviceConfigs: deviceConfigs.map((value) => ({
@@ -47,12 +51,16 @@ router.get("/:id", function (req, res) {
 
 // Add device form submitted
 router.post("/:id", function (req, res) {
+  // Device id is an integer therefore we parseInt, if it fails we set it to 0
   const deviceId = parseInt(req.params["id"]) || 0;
+
   // If device id is invalid i.e. 0 or NaN
   if (deviceId < 1) {
     res.status(400).send("User device id is invalid.");
     return;
   }
+
+  // Prepare rows for updating in user_device_configs i.e. the device settings user has chosen
   const formKeys = Object.keys(req.body);
   const formValues = Object.values(req.body);
   const valuesToInsert = formKeys.map((key, i) => {
@@ -61,6 +69,7 @@ router.post("/:id", function (req, res) {
       typeof formValues[i] === "object" ? formValues[i][1] : formValues[i];
     return [deviceId, +key, value];
   });
+  // Updating device configs
   let sqlquery =
     "INSERT INTO user_devices_configs (user_device_id, config_type_id, value)\
       VALUES ?\
@@ -71,6 +80,7 @@ router.post("/:id", function (req, res) {
       console.error(err);
       return;
     }
+    // Success message
     res.render("devices/edited.html", {
       title: "Device updated",
       id: deviceId,
