@@ -3,7 +3,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
 const ejs = require("ejs");
-const sassMiddleware = require("node-sass-middleware");
 
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
