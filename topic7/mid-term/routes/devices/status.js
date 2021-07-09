@@ -10,10 +10,14 @@ router.get("/:id", function (req, res) {
     res.status(400).send("User device id is invalid.");
     return;
   }
-  let sqlquery = "SELECT * FROM user_devices WHERE id = ?";
+  let sqlquery =
+    "SELECT user_devices.id, device_types.name as type FROM user_devices\
+      LEFT JOIN device_types ON device_types.id = user_devices.device_type_id\
+      WHERE user_devices.id = ?";
   db.query(sqlquery, deviceId, (err, userDevices) => {
     if (err) {
       res.status(500).send("Database query to fetch user device failed.");
+      console.error(err);
       return;
     } else if (userDevices.length < 1) {
       res.status(404).send("User device does not exist.");
@@ -36,6 +40,7 @@ router.get("/:id", function (req, res) {
       }
       res.render("devices/status.html", {
         title: "Device status",
+        userDevice: userDevices[0],
         deviceConfigs: deviceConfigs.map((value) => ({
           ...value,
           presets: JSON.parse(value.presets),

@@ -18,11 +18,33 @@
           <tr><th>Property</th><th>Value</th></tr>
         </thead>
         <tbody>
+          <tr><td>Device Type</td><td><%= userDevice.type %></td></tr>
           <% deviceConfigs.forEach(config => { %>
-            <tr><td><%= config.name %></td><td><%= config.value %></td></tr>
+            <% if (config.input === "range") { %>
+              <tr>
+                <td><%= config.name %></td>
+                <td>
+                  <div class="progress" style="height: 1.2rem">
+                    <div
+                      class="progress-bar"
+                      role="progressbar"
+                      style="width: <%= Math.round(config.value * 100 / config.presets[1]); %>%;"
+                      aria-valuenow="<%= Math.round(config.value * 100 / config.presets[1]); %>"
+                      aria-valuemin="<%= config.presets[0] %>"
+                      aria-valuemax="<%= config.presets[1] %>">
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            <% } else { %>
+              <tr><td><%= config.name %></td><td><%= config.value %></td></tr>
+            <% } %>
           <% }); %> 
         </tbody>
       </table>
+      <a class="btn btn-primary" href="/devices/edit/<%= userDevice.id %>">Edit</a>
+      <a class="btn btn-danger ml-4" href="/devices/delete/<%= userDevice.id %>">Delete</a>
+      <a class="btn btn-secondary ml-2" onclick="window.history.back()">Back</a>
     </div>
   </div>
 </body>
