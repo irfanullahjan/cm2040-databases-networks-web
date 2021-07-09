@@ -2,9 +2,7 @@
 <html>
 
 <head>
-  <title>
-    <%= title %>
-  </title>
+  <title><%= title %></title>
   <%- include("../../common/components/head.html") %>
 </head>
 
@@ -15,10 +13,17 @@
       <h1>Add a new device</h1>
       <p>Select a device type to add:</p>
       <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        <button
+          class="btn btn-primary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false">
+          <!-- Highlight selected device in the dropdown -->
           <%= allDevices.find(device => device.id === deviceTypeId).name %> 
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <!-- Render dropdown list items -->
           <% allDevices.forEach(device => { %> 
             <li>
               <a
