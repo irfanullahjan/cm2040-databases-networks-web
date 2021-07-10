@@ -8,12 +8,55 @@
 
 <body>
   <%- include("../common/components/navbar.html") %>
-  <div class="page-wrapper">
-    <div class="container">
-      <h1>About page</h1>
-      <p>Student name: Irfanullah Jan</p>
+    <div class="page-wrapper">
+      <div class="container">
+        <h1>About page</h1>
+        <p>The following table lists details about the app. Some of this information e.g. database credentials, will not be made public when the
+          app is deployed to public, for security reasons.</p>
+        <table class="table table-sm" style="max-width: 600px;">
+          <tbody>
+            <tr>
+              <td>Application name</td>
+              <td>MySmartHome</td>
+            </tr>
+            <tr>
+              <td>Developer</td>
+              <td>Irfanullah Jan</td>
+            </tr>
+            <tr>
+              <td>Backend</td>
+              <td>Node.js and Express.js</td>
+            </tr>
+            <tr>
+              <td>Templating</td>
+              <td>EJS</td>
+            </tr>
+            <tr>
+              <td>App Hostname</td>
+              <td>
+                <%= appHost %>
+              </td>
+            </tr>
+            <tr>
+              <td>App Port</td>
+              <td>
+                <%= appPort %>
+              </td>
+            </tr>
+            <tr>
+              <td>Database</td>
+              <td>MySQL</td>
+            </tr>
+            <% Object.keys(db).forEach(key => { %>
+              <tr>
+                <td><%= key %></td>
+                <td><%= db[key] %></td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
 </body>
 
 </html>
