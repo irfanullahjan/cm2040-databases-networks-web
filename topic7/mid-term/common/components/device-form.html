@@ -35,6 +35,7 @@
           type="text"
           name="<%= config.config_type_id %>"
           value="<%= config.value %>"
+          maxlength="64" <% // Length of user_devices_configs.value VARCHAR(64) %> 
           <% // Make name required %>
           <%= config.name === "Name" ? "required" : null %>
           <% // IP address pattern validation %>

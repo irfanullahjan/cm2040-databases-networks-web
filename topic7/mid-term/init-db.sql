@@ -1,4 +1,4 @@
--- Database initialization queries
+-- Database initialization queries (MySQL)
 -- Run these to populate initial data IN the database
 -- Assumes that Database named `smarthome` is already created USE smarthome;
 
@@ -18,7 +18,7 @@ CREATE TABLE config_types(
   presets JSON
 );
 
--- Mapping devices to configuration types e.g. Television has Power, Volume, IP Address
+-- Mapping device_types ---- to many ---> config_types e.g. Television has Power, Volume, IP Address
 CREATE TABLE device_types_configs(
   device_type_id INT NOT NULL,
   config_type_id INT NOT NULL,
