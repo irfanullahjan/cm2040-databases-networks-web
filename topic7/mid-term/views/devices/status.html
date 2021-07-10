@@ -42,7 +42,7 @@
               <tr>
                 <td><%= config.name %></td>
                 <td>
-                  <%= config.value === "on" ? "✔️" : "❌" %> 
+                  <%- config.value === "on" ? "<i class=\"bi bi-toggle-on fs-3\"></i>" : "<i class=\"bi bi-toggle-off fs-3\"></i>" %> 
                 </td>
               </tr>
             <% } else if (config.input === "radio" || config.input === "select") { %>
@@ -64,9 +64,9 @@
           <% }); %> 
         </tbody>
       </table>
-      <a class="btn btn-primary" href="/devices/edit/<%= userDevice.id %>">Edit</a>
-      <a class="btn btn-danger ml-4" href="/devices/delete/<%= userDevice.id %>">Delete</a>
-      <a class="btn btn-secondary ml-2" onclick="window.history.back()">Back</a>
+      <a class="btn btn-primary" href="/devices/edit/<%= userDevice.id %>"><i class="bi bi-pencil-square"></i> Edit</a>
+      <a class="btn btn-danger ml-4" href="/devices/delete/<%= userDevice.id %>"><i class="bi bi-trash"></i> Delete</a>
+      <a class="btn btn-secondary ml-2" onclick="window.history.back()"><i class="bi bi-arrow-counterclockwise"></i> Back</a>
     </div>
   </div>
 </body>
