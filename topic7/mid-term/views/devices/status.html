@@ -42,7 +42,7 @@
               <tr>
                 <td><%= config.name %></td>
                 <td>
-                  <%- config.value === "on" ? "<i class=\"bi bi-toggle-on fs-3\"></i>" : "<i class=\"bi bi-toggle-off fs-3\"></i>" %> 
+                  <%- config.value === "on" ? "<i class=\"bi bi-toggle-on text-success fs-3\"></i>" : "<i class=\"bi bi-toggle-off text-danger fs-3\"></i>" %> 
                 </td>
               </tr>
             <% } else if (config.input === "radio" || config.input === "select") { %>

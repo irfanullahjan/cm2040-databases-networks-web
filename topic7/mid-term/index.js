@@ -30,7 +30,7 @@ db.connect((err) => {
 global.db = db;
 
 const app = express();
-const port = 8089;
+const port = process.env.APP_PORT;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -48,6 +48,6 @@ app.engine("html", ejs.renderFile);
 // Starting Express server
 app.listen(port, () =>
   console.log(
-    `MySmartHome app running.\nHost: localhost\nPort: ${port}`
+    `MySmartHome app running.\nHost: ${process.env.APP_HOST}\nPort: ${port}`
   )
 );

@@ -72,7 +72,7 @@ VALUES
 INSERT INTO config_types
 VALUES
   (1, "Name", "text", NULL),
-  (2, "Power", "radio", '["On", "Off"]'),
+  (2, "Power", "checkbox", NULL),
   (3, "RPM", "range", '[0, 1000]'),
   (4, "Auto-sleep", "checkbox", NULL),
   (5, "Auto-update", "checkbox", NULL),
