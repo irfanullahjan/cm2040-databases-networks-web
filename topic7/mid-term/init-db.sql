@@ -2,6 +2,8 @@
 -- Run these to populate initial data IN the database
 -- Assumes that Database named `smarthome` is already created USE smarthome;
 
+CREATE DATABASE smarthome;
+
 USE smarthome;
 
 -- Device types e.g. Television, Radio
